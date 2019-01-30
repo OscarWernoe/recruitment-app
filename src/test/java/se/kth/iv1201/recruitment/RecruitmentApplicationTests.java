@@ -1,4 +1,4 @@
-package se.kth.iv1201.recruitmentapp;
+package se.kth.iv1201.recruitment;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
