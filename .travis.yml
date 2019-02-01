@@ -4,5 +4,5 @@ jdk: oraclejdk11
 addons:
   mariadb: 10.3
 before_script:
-  - mysqladmin -u root password "seal"
-  - mysql source db.sql
+  - mysql -e "CREATE DATABASE recruitment_db;" -u root
+  - mysql recruitment_db < db.sql -u root

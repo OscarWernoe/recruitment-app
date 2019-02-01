@@ -1,5 +1,3 @@
-CREATE DATABASE IF NOT EXISTS recruitment_db;
-
 USE recruitment_db;
 
 CREATE TABLE role
