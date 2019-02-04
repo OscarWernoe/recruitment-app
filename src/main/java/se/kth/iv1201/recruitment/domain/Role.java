@@ -1,8 +1,13 @@
 package se.kth.iv1201.recruitment.domain;
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import javax.persistence.*;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
 @Entity
 public class Role {
 
@@ -11,6 +16,8 @@ public class Role {
     @Column(name = "role_id")
     private long roleId;
 
-    @NotNull
     private String name;
+
+    @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
+    private List<Person> personList;
 }
