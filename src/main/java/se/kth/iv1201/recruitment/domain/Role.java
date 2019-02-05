@@ -14,10 +14,10 @@ public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "role_id")
-    private long roleId;
-
+    private long id;
     private String name;
 
     @OneToMany(mappedBy = "role", cascade = CascadeType.ALL)
     private List<Person> personList;
+
 }

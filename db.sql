@@ -8,14 +8,14 @@ CREATE TABLE role
 
 CREATE TABLE person
 (
-  person_id  BIGINT PRIMARY KEY AUTO_INCREMENT,
-  first_name VARCHAR(255),
-  last_name  VARCHAR(255),
-  ssn        VARCHAR(255),
-  email      VARCHAR(255),
-  password   VARCHAR(255),
-  role_id    BIGINT REFERENCES role,
-  username   VARCHAR(255)
+  person_id BIGINT PRIMARY KEY AUTO_INCREMENT,
+  name      VARCHAR(255),
+  surname   VARCHAR(255),
+  ssn       VARCHAR(255),
+  email     VARCHAR(255),
+  password  VARCHAR(255),
+  role_id   BIGINT REFERENCES role,
+  username  VARCHAR(255)
 );
 
 CREATE TABLE availability
