@@ -18,7 +18,8 @@ public class RecruitmentController {
         this.service = service;
     }
 
-    @RequestMapping(value = "/accounts", method = RequestMethod.POST, produces = "application/json")
+    @CrossOrigin
+    @PostMapping(value = "/accounts")
     public @ResponseBody
     Map createAccount(@RequestBody AccountDTO accountDTO) {
         try {
