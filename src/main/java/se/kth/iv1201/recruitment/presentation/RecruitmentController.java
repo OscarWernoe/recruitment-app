@@ -32,7 +32,7 @@ public class RecruitmentController {
      * @return JSON response with indication of the result of the account creation.
      */
     @CrossOrigin
-    @PostMapping(value = "/accounts")
+    @PostMapping(value = "/users")
     public @ResponseBody
     Map createAccount(@RequestBody AccountDTO accountDTO) {
         try {
