@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.util.List;
 
+/**
+ * Entity representing a role for a person in the database.
+ */
 @Data
 @NoArgsConstructor
 @Entity

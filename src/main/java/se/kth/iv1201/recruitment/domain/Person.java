@@ -5,6 +5,9 @@ import lombok.RequiredArgsConstructor;
 
 import javax.persistence.*;
 
+/**
+ * Entity representing a person in the database.
+ */
 @Data
 @RequiredArgsConstructor
 @Entity

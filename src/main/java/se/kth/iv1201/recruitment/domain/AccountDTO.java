@@ -3,6 +3,9 @@ package se.kth.iv1201.recruitment.domain;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+/**
+ * A data transfer object for the Person object.
+ */
 @Data
 @RequiredArgsConstructor
 public class AccountDTO {
