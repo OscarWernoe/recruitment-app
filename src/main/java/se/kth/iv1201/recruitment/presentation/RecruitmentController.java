@@ -19,7 +19,7 @@ public class RecruitmentController {
     }
 
     @CrossOrigin
-    @PostMapping(value = "/accounts")
+    @PostMapping(value = "/users")
     public @ResponseBody
     Map createAccount(@RequestBody AccountDTO accountDTO) {
         try {
