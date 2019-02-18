@@ -1,7 +1,10 @@
 package se.kth.iv1201.recruitment.presentation;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
 import se.kth.iv1201.recruitment.application.RecruitmentService;
 import se.kth.iv1201.recruitment.domain.AccountDTO;
 
@@ -33,8 +36,7 @@ public class RecruitmentController {
      */
     @CrossOrigin
     @PostMapping(value = "/users")
-    public @ResponseBody
-    Map createAccount(@RequestBody AccountDTO accountDTO) {
+    public Map createAccount(@RequestBody AccountDTO accountDTO) {
         try {
             this.service.createAccount(accountDTO);
         } catch (Exception e) {
