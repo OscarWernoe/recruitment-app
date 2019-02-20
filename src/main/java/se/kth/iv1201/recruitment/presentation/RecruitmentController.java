@@ -1,47 +1,85 @@
 package se.kth.iv1201.recruitment.presentation;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.web.bind.annotation.*;
 import se.kth.iv1201.recruitment.application.RecruitmentService;
-import se.kth.iv1201.recruitment.domain.AccountDTO;
+import se.kth.iv1201.recruitment.payload.JwtAuthenticationResponse;
+import se.kth.iv1201.recruitment.payload.LoginRequest;
+import se.kth.iv1201.recruitment.payload.Response;
+import se.kth.iv1201.recruitment.payload.SignUpRequest;
+import se.kth.iv1201.recruitment.security.JwtTokenProvider;
 
-import java.util.Collections;
-import java.util.Map;
+import javax.validation.Valid;
+import java.util.ArrayList;
 
 /**
- * A rest controller handling the HTTP requests of the recruitment process.
+ * A rest controller handling all incoming HTTP requests to the application.
  */
 @RestController
+@CrossOrigin
 public class RecruitmentController {
 
     private final RecruitmentService service;
+    private final AuthenticationManager authenticationManager;
+    private final JwtTokenProvider tokenProvider;
 
     /**
      * Creates an instance of the controller with a specified RecruitmentService linked to it.
      *
-     * @param service The RecruitmentService instance
+     * @param service               The RecruitmentService instance
+     * @param authenticationManager The AuthenticationManager instance
+     * @param tokenProvider         The JwtTokenProvider instance
      */
     @Autowired
-    public RecruitmentController(RecruitmentService service) {
+    public RecruitmentController(RecruitmentService service, AuthenticationManager authenticationManager, JwtTokenProvider tokenProvider) {
         this.service = service;
+        this.authenticationManager = authenticationManager;
+        this.tokenProvider = tokenProvider;
     }
 
     /**
-     * Handling the create account request.
-     * @param accountDTO The data transfer object for Person.
+     * Handles applicant registration requests.
+     *
+     * @param signUpRequest
      * @return JSON response with indication of the result of the account creation.
      */
-    @CrossOrigin
-    @PostMapping(value = "/users")
-    public Map createAccount(@RequestBody AccountDTO accountDTO) {
+    @PostMapping("/users")
+    public ResponseEntity<?> register(@Valid @RequestBody SignUpRequest signUpRequest) {
         try {
-            this.service.createAccount(accountDTO);
+            this.service.createApplicant(signUpRequest);
         } catch (Exception e) {
-            return Collections.singletonMap("response", "failure");
+            return ResponseEntity.ok(new Response(false, null));
         }
-        return Collections.singletonMap("response", "success");
+        return ResponseEntity.ok(new Response(true, null));
+    }
+
+    /**
+     * @param loginRequest
+     * @return JSON response
+     */
+    @PostMapping("/session")
+    public ResponseEntity<?> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(
+                        loginRequest.getUsername(),
+                        loginRequest.getPassword(),
+                        new ArrayList<>()
+                )
+        );
+
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        String jwt = tokenProvider.generateToken(authentication);
+        return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<?> test() {
+        return ResponseEntity.ok(new Response(true, null));
     }
 }

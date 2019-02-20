@@ -39,3 +39,8 @@ CREATE TABLE competence_profile
   competence_id         BIGINT REFERENCES competence,
   years_of_experience   NUMERIC(4, 2)
 );
+
+INSERT INTO role (role_id, name)
+VALUES (1, 'recruiter');
+INSERT INTO role (role_id, name)
+VALUES (2, 'applicant');

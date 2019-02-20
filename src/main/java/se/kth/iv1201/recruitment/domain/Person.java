@@ -1,33 +1,47 @@
 package se.kth.iv1201.recruitment.domain;
 
 import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
 /**
  * Entity representing a person in the database.
  */
-@Data
-@RequiredArgsConstructor
 @Entity
+@Data
+@NoArgsConstructor
 public class Person {
-    private final String name;
-    private final String surname;
-    private final String email;
-    private final String ssn;
-    private final String password;
-
-    @Column(unique = true)
-    private final String username;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "person_id")
     private long id;
 
+    private String name;
+
+    private String surname;
+
+    private String email;
+
+    private String ssn;
+
+    @Column(unique = true)
+    private String username;
+
+    private String password;
+
     @ManyToOne
     @JoinColumn(name = "role_id")
     private Role role;
 
+    public Person(String name, String surname, String email, String ssn, String username, String password, Role role) {
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+        this.ssn = ssn;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 }
