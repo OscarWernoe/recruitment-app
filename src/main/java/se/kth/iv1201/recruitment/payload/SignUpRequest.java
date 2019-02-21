@@ -18,6 +18,7 @@ public class SignUpRequest {
     @NotBlank
     private String email;
 
+    // TODO: constraint that checks that SSN contains only digits
     @NotBlank
     private String ssn;
 
