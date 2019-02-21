@@ -22,8 +22,10 @@ public class Person {
 
     private String surname;
 
+    @Column(unique = true)
     private String email;
 
+    @Column(unique = true)
     private String ssn;
 
     @Column(unique = true)

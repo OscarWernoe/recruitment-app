@@ -2,6 +2,7 @@ package se.kth.iv1201.recruitment.security;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
@@ -11,6 +12,7 @@ import javax.crypto.SecretKey;
 
 @Component
 public class JwtTokenProvider {
+    public static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
     @Value("${app.jwtSecret}")
     private String jwtSecret;
@@ -21,23 +23,21 @@ public class JwtTokenProvider {
     public String generateToken(Authentication authentication) {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        byte[] keyBytes = jwtSecret.getBytes();
-        SecretKey key = Keys.hmacShaKeyFor(keyBytes);
-
         // TODO: Set expiration in JWT
 
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
                 .claim("role", userDetails.getRole())
-                .signWith(key)
+                .signWith(SECRET_KEY)
                 .compact();
     }
 
     public boolean validateToken(String authToken) {
         try {
-            Jwts.parser().setSigningKey(jwtSecret).parseClaimsJws(authToken);
+            Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(authToken);
             return true;
         } catch (JwtException e) {
+            e.printStackTrace();
             return false;
         }
     }

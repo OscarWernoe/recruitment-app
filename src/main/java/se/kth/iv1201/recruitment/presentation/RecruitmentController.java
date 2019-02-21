@@ -15,7 +15,6 @@ import se.kth.iv1201.recruitment.payload.SignUpRequest;
 import se.kth.iv1201.recruitment.security.JwtTokenProvider;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 
 /**
  * A rest controller handling all incoming HTTP requests to the application.
@@ -67,8 +66,7 @@ public class RecruitmentController {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginRequest.getUsername(),
-                        loginRequest.getPassword(),
-                        new ArrayList<>()
+                        loginRequest.getPassword()
                 )
         );
 

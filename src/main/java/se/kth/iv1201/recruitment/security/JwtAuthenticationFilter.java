@@ -16,6 +16,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
@@ -39,13 +40,12 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
             if (!jwt.isEmpty() && tokenProvider.validateToken(jwt)) {
 
-                // TODO: Need key?
-                String username = Jwts.parser().parseClaimsJws(jwt).getBody().getSubject();
+                String username = Jwts.parser().setSigningKey(JwtTokenProvider.SECRET_KEY).parseClaimsJws(jwt).getBody().getSubject();
 
+                // TODO: Create UserDetails from JWT
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
-                // Not sure what I'm doing here...
-                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null);
+                UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, new ArrayList<>());
                 authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
                 SecurityContextHolder.getContext().setAuthentication(authentication);
