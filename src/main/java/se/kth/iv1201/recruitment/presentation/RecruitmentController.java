@@ -46,13 +46,8 @@ public class RecruitmentController {
      * @return JSON response with indication of the result of the account creation.
      */
     @PostMapping("/users")
-    public ResponseEntity<?> register(@Valid @RequestBody SignUpRequest signUpRequest) {
-        try {
-            this.service.createApplicant(signUpRequest);
-        } catch (Exception e) {
-            return ResponseEntity.ok(new Response(false, null));
-        }
-        return ResponseEntity.ok(new Response(true, null));
+    public void register(@Valid @RequestBody SignUpRequest signUpRequest) throws Exception {
+        this.service.createApplicant(signUpRequest);
     }
 
     /**

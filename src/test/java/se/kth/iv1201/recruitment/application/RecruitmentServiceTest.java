@@ -43,4 +43,8 @@ public class RecruitmentServiceTest {
         final long countAfter = personRepository.count();
         assertThat(countAfter, is(greaterThan(countBefore)));
     }
+
+    // TODO test existByUsername()
+    // TODO test existByEmail()
+
 }

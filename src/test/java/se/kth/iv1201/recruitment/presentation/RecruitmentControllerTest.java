@@ -36,6 +36,6 @@ public class RecruitmentControllerTest {
 
     @Test
     public void authenticate() {
-        // TODO
+        // TODO how to test authentication?
     }
 }

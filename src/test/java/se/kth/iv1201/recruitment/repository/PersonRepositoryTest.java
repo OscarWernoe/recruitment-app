@@ -45,4 +45,7 @@ public class PersonRepositoryTest {
         assertEquals(person, actual);
     }
 
+    // TODO test existByUsername()
+    // TODO test existByEmail()
+
 }
