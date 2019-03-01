@@ -1,6 +1,7 @@
 package se.kth.iv1201.recruitment.presentation;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -11,6 +12,7 @@ import se.kth.iv1201.recruitment.application.RecruitmentService;
 import se.kth.iv1201.recruitment.domain.LoginRequest;
 import se.kth.iv1201.recruitment.domain.SignUpRequest;
 import se.kth.iv1201.recruitment.security.JwtTokenProvider;
+import se.kth.iv1201.recruitment.security.UserDetailsImpl;
 
 import javax.validation.Valid;
 
@@ -57,7 +59,7 @@ public class RecruitmentController {
 
     /**
      * @param loginRequest DTO containing the necessary validated fields to login in to an account.
-     * @return JSON response.
+     * @return JSON response with JWT access token.
      */
     @PostMapping("/session")
     public ResponseEntity<?> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
@@ -74,8 +76,41 @@ public class RecruitmentController {
         return ResponseEntity.ok(new JwtAuthenticationResponse(jwt));
     }
 
-    @GetMapping("/test")
-    public ResponseEntity<?> test() {
+    /**
+     * @return
+     */
+    @PostMapping("/applications")
+    public ResponseEntity<?> apply() {
         return ResponseEntity.ok(new Response(true, null));
+    }
+
+    /**
+     * @return
+     */
+    @GetMapping("/applications")
+    public ResponseEntity<?> listApplications() {
+        if (isRecruiter()) {
+            return ResponseEntity.ok(new Response(true, null));
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    /**
+     * @param id
+     * @return
+     */
+    @GetMapping("/applications/{id}")
+    public ResponseEntity<?> showApplication(@PathVariable Long id) {
+        if (isRecruiter()) {
+            return ResponseEntity.ok(new Response(true, id.toString()));
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
+    }
+
+    private boolean isRecruiter() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getRole().equals("recruiter");
     }
 }
