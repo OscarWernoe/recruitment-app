@@ -30,9 +30,9 @@ public class RecruitmentController {
     /**
      * Creates an instance of the controller with a specified RecruitmentService linked to it.
      *
-     * @param service               The RecruitmentService instance
-     * @param authenticationManager The AuthenticationManager instance
-     * @param tokenProvider         The JwtTokenProvider instance
+     * @param service               The RecruitmentService instance.
+     * @param authenticationManager The AuthenticationManager instance.
+     * @param tokenProvider         The JwtTokenProvider instance.
      */
     @Autowired
     public RecruitmentController(RecruitmentService service, AuthenticationManager authenticationManager, JwtTokenProvider tokenProvider) {
@@ -44,7 +44,7 @@ public class RecruitmentController {
     /**
      * Handles applicant registration requests.
      *
-     * @param signUpRequest
+     * @param signUpRequest DTO containing the necessary validated fields to register an account.
      * @return JSON response with indication of the result of the account creation.
      */
     @PostMapping("/users")
@@ -58,8 +58,8 @@ public class RecruitmentController {
     }
 
     /**
-     * @param loginRequest
-     * @return JSON response
+     * @param loginRequest DTO containing the necessary validated fields to login in to an account.
+     * @return JSON response.
      */
     @PostMapping("/session")
     public ResponseEntity<?> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
