@@ -34,7 +34,7 @@ public class PersonRepositoryTest {
 
     private Person getPerson() throws Exception {
         Role role = roleRepository.findByName("applicant").orElseThrow(Exception::new);
-        return new Person("Testy", "Testerson", "test@tail.com", "1234", "username", "password", role);
+        return new Person("Test", "Test", "test@test.com", "1234", "testUsername", "testPassword", role);
     }
 
     @Test

@@ -5,7 +5,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import se.kth.iv1201.recruitment.domain.Person;
 import se.kth.iv1201.recruitment.domain.Role;
-import se.kth.iv1201.recruitment.payload.SignUpRequest;
+import se.kth.iv1201.recruitment.domain.SignUpRequest;
 import se.kth.iv1201.recruitment.repository.PersonRepository;
 import se.kth.iv1201.recruitment.repository.RoleRepository;
 

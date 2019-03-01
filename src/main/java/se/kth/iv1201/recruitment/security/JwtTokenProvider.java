@@ -14,9 +14,6 @@ import javax.crypto.SecretKey;
 public class JwtTokenProvider {
     public static final SecretKey SECRET_KEY = Keys.secretKeyFor(SignatureAlgorithm.HS512);
 
-    @Value("${app.jwtSecret}")
-    private String jwtSecret;
-
     @Value("${app.jwtExpiration}")
     private String jwtExpiration;
 

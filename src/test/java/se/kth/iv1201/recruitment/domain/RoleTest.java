@@ -19,18 +19,12 @@ public class RoleTest {
 
     @Autowired
     private RoleRepository roleRepository;
-    private Role applicant;
-    private Role recruiter;
 
     @Test
-    public void entitiesExistInDb() {
+    public void entitiesExistInDatabase() {
         Optional<Role> applicantOptional = roleRepository.findByName("applicant");
         Optional<Role> recruiterOptional = roleRepository.findByName("recruiter");
         assertTrue(applicantOptional.isPresent());
         assertTrue(recruiterOptional.isPresent());
-        applicant = applicantOptional.get();
-        recruiter = recruiterOptional.get();
     }
-
-
 }

@@ -1,4 +1,4 @@
-package se.kth.iv1201.recruitment.payload;
+package se.kth.iv1201.recruitment.domain;
 
 import lombok.Data;
 
@@ -10,25 +10,25 @@ import javax.validation.constraints.Size;
 @Data
 public class SignUpRequest {
 
-    @NotBlank(message = "{name.was.blank}")
+    @NotBlank
     private String name;
 
-    @NotBlank(message = "{surname.was.blank}")
+    @NotBlank
     private String surname;
 
-    @Email(message = "{provide.a.valid.email}")
-    @NotBlank(message = "{email.was.blank}")
+    @Email
+    @NotBlank
     private String email;
 
-    @Pattern(regexp = "^[0-9]*$", message = "{ssn.contained.non.numeric.values}")
-    @NotBlank(message = "{ssn.was.blank}")
+    @Pattern(regexp = "^[0-9]*$")
+    @NotBlank
     private String ssn;
 
-    @NotBlank(message = "{username.was.blank}")
+    @NotBlank
     private String username;
 
-    @NotBlank(message = "{password.was.blank}")
-    @Size(min = 8, message = "{password.length.violated}")
+    @NotBlank
+    @Size(min = 8)
     private String password;
 
     public SignUpRequest(String name, String surname, String email, String ssn, String username, String password) {

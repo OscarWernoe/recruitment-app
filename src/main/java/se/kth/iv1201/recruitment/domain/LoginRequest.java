@@ -1,4 +1,4 @@
-package se.kth.iv1201.recruitment.payload;
+package se.kth.iv1201.recruitment.domain;
 
 import lombok.Data;
 
@@ -8,10 +8,10 @@ import javax.validation.constraints.Size;
 @Data
 public class LoginRequest {
 
-    @NotBlank(message = "{username.was.blank}")
+    @NotBlank
     private final String username;
 
-    @NotBlank(message = "{password.was.blank}")
-    @Size(min = 8, message = "{password.length.violated}")
+    @NotBlank
+    @Size(min = 8)
     private final String password;
 }

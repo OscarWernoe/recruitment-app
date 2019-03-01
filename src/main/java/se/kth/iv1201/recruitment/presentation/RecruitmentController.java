@@ -8,10 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import se.kth.iv1201.recruitment.application.RecruitmentService;
-import se.kth.iv1201.recruitment.payload.JwtAuthenticationResponse;
-import se.kth.iv1201.recruitment.payload.LoginRequest;
-import se.kth.iv1201.recruitment.payload.Response;
-import se.kth.iv1201.recruitment.payload.SignUpRequest;
+import se.kth.iv1201.recruitment.domain.LoginRequest;
+import se.kth.iv1201.recruitment.domain.SignUpRequest;
 import se.kth.iv1201.recruitment.security.JwtTokenProvider;
 
 import javax.validation.Valid;

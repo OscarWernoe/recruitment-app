@@ -1,4 +1,4 @@
-package se.kth.iv1201.recruitment.payload;
+package se.kth.iv1201.recruitment.domain;
 
 import org.junit.BeforeClass;
 import org.junit.Test;

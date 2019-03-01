@@ -1,4 +1,4 @@
-package se.kth.iv1201.recruitment.payload;
+package se.kth.iv1201.recruitment.domain;
 
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -26,38 +26,23 @@ public class SignUpRequestTest {
 
     @Test
     public void validRequest() {
-        SignUpRequest validRequest = new SignUpRequest("Trialer"
-                , "Trialee"
-                , "trialer@trailee.com"
-                , "192838", "trialerUsername"
-                , "trialerPassword");
+        SignUpRequest validRequest = new SignUpRequest("Test", "Test", "test@test.com", "1234", "testUsername", "testPassword");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(validRequest);
         assertThat(violations.size(), is(0));
     }
 
     @Test
     public void blankRequest() {
-        SignUpRequest blankRequest = new SignUpRequest(""
-                , ""
-                , ""
-                , "", ""
-                , "");
+        SignUpRequest blankRequest = new SignUpRequest("", "", "", "", "", "");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(blankRequest);
-        /*
-         * password fires twice, both blank and too short.
-         * email on fires on blank.
-         * */
+        // password fires twice, both blank and too short, email fires on blank
         assertThat(violations.size(), is(7));
     }
 
     @Test
     public void invalidRequest() {
-        // test that invalid email, non-numeric ssn, short password fires (3 violations)
-        SignUpRequest invalidRequest = new SignUpRequest("Trialer"
-                , "Trialee"
-                , "emailWithoutAtSymbol"
-                , "1213A", "trialerUsername"
-                , "len<8");
+        // test that invalid email, non-numeric ssn, and short password fires (3 violations)
+        SignUpRequest invalidRequest = new SignUpRequest("Test", "Test", "emailWithoutAtSymbol", "1234a", "testUsername", "short");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(invalidRequest);
         assertThat(violations.size(), is(3));
     }

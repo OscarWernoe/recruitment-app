@@ -21,27 +21,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @Transactional
 public class RecruitmentControllerTest {
 
-    /*
-     * Request body (success):
-     *
-     *   {"name":"Test","surname":"Testerson","email":"test@email.com","ssn":"12345678980","username":"testUsername","password":"testPassword"}
-     *
-     * Success response:
-     *
-     *   {"success":true,"message":null}
-     *
-     * Failure response: (email not unique)
-     *
-     *   {"success":false,"message":null}
-     *
-     * */
-
     @Autowired
     private MockMvc mockMvc;
 
     @Test
     public void register() throws Exception {
-        String requestBody = "{\"name\":\"Test\",\"surname\":\"Testerson\",\"email\":\"test@email.com\",\"ssn\":\"12345678980\",\"username\":\"testUsername\",\"password\":\"testPassword\"}";
+        String requestBody = "{\"name\":\"Test\",\"surname\":\"Test\",\"email\":\"test@test.com\",\"ssn\":\"1234\",\"username\":\"testUsername\",\"password\":\"testPassword\"}";
         this.mockMvc.perform(post("/users")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(requestBody)).andDo(print())
@@ -51,6 +36,6 @@ public class RecruitmentControllerTest {
 
     @Test
     public void authenticate() {
-        // Todo: how can we determine success or failure
+        // TODO
     }
 }
