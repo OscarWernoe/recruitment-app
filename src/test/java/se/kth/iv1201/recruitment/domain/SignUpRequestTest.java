@@ -24,7 +24,7 @@ public class SignUpRequestTest {
 
     @Test
     public void validRequest() {
-        SignUpRequest validRequest = new SignUpRequest("Test", "Test", "test@test.com", "1234567891", "testUsername", "testPassword");
+        SignUpRequest validRequest = new SignUpRequest("Test", "Test", "test@test.com", "1234567890", "testUsername", "testPassword");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(validRequest);
         assertThat(violations.size(), is(0));
     }
@@ -47,7 +47,7 @@ public class SignUpRequestTest {
     @Test
     public void invalidRequestConcerningMin() {
         // test that too short length of name, surname, ssn and password fires 4 violations.
-        SignUpRequest invalidRequest = new SignUpRequest("T", "V", "email@correct.com", "123456789", "testuser", "short");
+        SignUpRequest invalidRequest = new SignUpRequest("T", "V", "email@correct.com", "123456789", "testUsername", "short");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(invalidRequest);
         assertThat(violations.size(), is(4));
     }
@@ -55,9 +55,8 @@ public class SignUpRequestTest {
     @Test
     public void invalidRequestConcerningMax() {
         // test that too long length of name, surname, email, ssn, username and password fires 6 violations.
-        SignUpRequest invalidRequest = new SignUpRequest("TestTestTestTestTestTestTestTestTestTestTestTestTest", "TestTestTestTestTestTestTestTestTestTestTestTestTest", "email@correct.com.TestTestTestTestTestTestTestTestTestTestTestTestTest", "12345678910", "testuserTestTestTestTestTestTestTestTestTestTestTestTestTest", "UltraShortPasswordUltraShortPasswordUltraShortPasswordUltraShortPasswordUltraShortPasswordUltraShortPassword");
+        SignUpRequest invalidRequest = new SignUpRequest("TestTestTestTestTestTestTestTestTestTestTestTestTest", "TestTestTestTestTestTestTestTestTestTestTestTestTest", "email@correct.com.TestTestTestTestTestTestTestTestTestTestTestTestTest", "12345678910", "testUsernameTestTestTestTestTestTestTestTestTestTestTestTestTest", "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(invalidRequest);
         assertThat(violations.size(), is(6));
     }
-    //TODO do not include this class in commit
 }

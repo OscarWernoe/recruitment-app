@@ -34,7 +34,7 @@ public class RecruitmentServiceTest {
         signUpRequest = new SignUpRequest("Test"
                 , "Test"
                 , "test@test.com"
-                , "1234", "testUsername"
+                , "1234567890", "testUsername"
                 , "testPassword");
     }
 
@@ -52,7 +52,7 @@ public class RecruitmentServiceTest {
         SignUpRequest sameUsernameRequest = new SignUpRequest("TestOther"
                 , "TestOther"
                 , "testOther@test.com"
-                , "0987", "testUsername"
+                , "0987654321", "testUsername"
                 , "testPasswordOther");
         service.createApplicant(sameUsernameRequest);
     }
@@ -63,7 +63,7 @@ public class RecruitmentServiceTest {
         SignUpRequest sameEmailRequest = new SignUpRequest("TestOther"
                 , "TestOther"
                 , "test@test.com"
-                , "0987", "testUsernameOther"
+                , "0987654321", "testUsernameOther"
                 , "testPasswordOther");
         service.createApplicant(sameEmailRequest);
     }

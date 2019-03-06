@@ -33,7 +33,7 @@ public class RecruitmentControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-    private String requestBody = "{\"name\":\"Test\",\"surname\":\"Test\",\"email\":\"test@test.com\",\"ssn\":\"1234\",\"username\":\"testUsername\",\"password\":\"testPassword\"}";
+    private String requestBody = "{\"name\":\"Test\",\"surname\":\"Test\",\"email\":\"test@test.com\",\"ssn\":\"1234567890\",\"username\":\"testUsername\",\"password\":\"testPassword\"}";
 
 
     @Test
@@ -66,7 +66,7 @@ public class RecruitmentControllerTest {
     @Test
     public void registerUsernameExists() throws Exception {
         registerTestUser();
-        String requestBodySameUsername = "{\"name\":\"TestOther\",\"surname\":\"TestOther\",\"email\":\"testOther@test.com\",\"ssn\":\"09876\",\"username\":\"testUsername\",\"password\":\"testPasswordOther\"}";
+        String requestBodySameUsername = "{\"name\":\"TestOther\",\"surname\":\"TestOther\",\"email\":\"testOther@test.com\",\"ssn\":\"1234567890\",\"username\":\"testUsername\",\"password\":\"testPasswordOther\"}";
         String expectedMessage = "That username is already in use.";
         performRequest(requestBodySameUsername, expectedMessage);
     }
@@ -74,7 +74,7 @@ public class RecruitmentControllerTest {
     @Test
     public void registerEmailExists() throws Exception {
         registerTestUser();
-        String requestBodySameEmail = "{\"name\":\"TestOther\",\"surname\":\"TestOther\",\"email\":\"test@test.com\",\"ssn\":\"09876\",\"username\":\"testUsernameOther\",\"password\":\"testPasswordOther\"}";
+        String requestBodySameEmail = "{\"name\":\"TestOther\",\"surname\":\"TestOther\",\"email\":\"test@test.com\",\"ssn\":\"1234567890\",\"username\":\"testUsernameOther\",\"password\":\"testPasswordOther\"}";
         String expectedMessage = "An account associated to that email address already exists.";
         performRequest(requestBodySameEmail, expectedMessage);
     }
