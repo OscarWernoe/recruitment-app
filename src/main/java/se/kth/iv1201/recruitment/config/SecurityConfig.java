@@ -20,6 +20,11 @@ import se.kth.iv1201.recruitment.security.UserDetailsServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
 
+//TODO: JavaDocs
+
+/**
+ *
+ */
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
@@ -28,12 +33,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
+    /**
+     * @param userDetailsService
+     * @param jwtAuthenticationEntryPoint
+     */
     @Autowired
     public SecurityConfig(UserDetailsServiceImpl userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
         this.userDetailsService = userDetailsService;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
     }
 
+    /**
+     * @return
+     */
     @Bean
     public PasswordEncoder passwordEncoder() {
         String idForEncode = "bcrypt";
@@ -42,22 +54,38 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         return new DelegatingPasswordEncoder(idForEncode, encoders);
     }
 
+    /**
+     * @return
+     * @throws Exception
+     */
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
         return new JwtAuthenticationFilter(authenticationManager(), jwtAuthenticationEntryPoint);
     }
 
+    /**
+     * @return
+     * @throws Exception
+     */
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return super.authenticationManagerBean();
     }
 
+    /**
+     * @param auth
+     * @throws Exception
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
+    /**
+     * @param http
+     * @throws Exception
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.cors().and().csrf().disable()

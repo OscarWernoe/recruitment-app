@@ -24,14 +24,24 @@ public class SignUpRequestTest {
 
     @Test
     public void validRequest() {
-        SignUpRequest validRequest = new SignUpRequest("Test", "Test", "test@test.com", "1234567890", "testUsername", "testPassword");
+        SignUpRequest validRequest = new SignUpRequest("Test"
+                , "Test"
+                , "test@test.com"
+                , "1234567890"
+                , "testUsername"
+                , "testPassword");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(validRequest);
         assertThat(violations.size(), is(0));
     }
 
     @Test
     public void blankRequest() {
-        SignUpRequest blankRequest = new SignUpRequest("", "", "", "", "", "");
+        SignUpRequest blankRequest = new SignUpRequest(""
+                , ""
+                , ""
+                , ""
+                , ""
+                , "");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(blankRequest);
         assertThat(violations.size(), is(10));
     }
@@ -39,7 +49,12 @@ public class SignUpRequestTest {
     @Test
     public void invalidRequestConcerningChar() {
         // test that invalid email and non-numeric ssn fires 2 violations.
-        SignUpRequest invalidRequest = new SignUpRequest("Test", "Test", "emailWithoutAtSymbol", "123456789a", "testUsername", "mediumLength");
+        SignUpRequest invalidRequest = new SignUpRequest("Test"
+                , "Test"
+                , "emailWithoutAtSymbol"
+                , "123456789a"
+                , "testUsername"
+                , "mediumLength");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(invalidRequest);
         assertThat(violations.size(), is(2));
     }
@@ -47,7 +62,12 @@ public class SignUpRequestTest {
     @Test
     public void invalidRequestConcerningMin() {
         // test that too short length of name, surname, ssn and password fires 4 violations.
-        SignUpRequest invalidRequest = new SignUpRequest("T", "V", "email@correct.com", "123456789", "testUsername", "short");
+        SignUpRequest invalidRequest = new SignUpRequest("T"
+                , "V"
+                , "email@correct.com"
+                , "123456789"
+                , "testUsername"
+                , "short");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(invalidRequest);
         assertThat(violations.size(), is(4));
     }
@@ -55,7 +75,11 @@ public class SignUpRequestTest {
     @Test
     public void invalidRequestConcerningMax() {
         // test that too long length of name, surname, email, ssn, username and password fires 6 violations.
-        SignUpRequest invalidRequest = new SignUpRequest("TestTestTestTestTestTestTestTestTestTestTestTestTest", "TestTestTestTestTestTestTestTestTestTestTestTestTest", "email@correct.com.TestTestTestTestTestTestTestTestTestTestTestTestTest", "12345678910", "testUsernameTestTestTestTestTestTestTestTestTestTestTestTestTest", "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest");
+        SignUpRequest invalidRequest = new SignUpRequest("TestTestTestTestTestTestTestTestTestTestTestTestTest"
+                , "TestTestTestTestTestTestTestTestTestTestTestTestTest"
+                , "email@correct.com.TestTestTestTestTestTestTestTestTestTestTestTestTest"
+                , "12345678910", "testUsernameTestTestTestTestTestTestTestTestTestTestTestTestTest"
+                , "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest");
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(invalidRequest);
         assertThat(violations.size(), is(6));
     }

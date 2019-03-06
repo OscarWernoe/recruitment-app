@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
+import se.kth.iv1201.recruitment.domain.EmailNotUniqueException;
 import se.kth.iv1201.recruitment.domain.SignUpRequest;
-import se.kth.iv1201.recruitment.presentation.EmailNotUniqueException;
-import se.kth.iv1201.recruitment.presentation.UsernameNotUniqueException;
+import se.kth.iv1201.recruitment.domain.UsernameNotUniqueException;
 import se.kth.iv1201.recruitment.repository.PersonRepository;
 
 import static org.hamcrest.Matchers.greaterThan;
@@ -34,7 +34,8 @@ public class RecruitmentServiceTest {
         signUpRequest = new SignUpRequest("Test"
                 , "Test"
                 , "test@test.com"
-                , "1234567890", "testUsername"
+                , "1234567890"
+                , "testUsername"
                 , "testPassword");
     }
 
@@ -52,7 +53,8 @@ public class RecruitmentServiceTest {
         SignUpRequest sameUsernameRequest = new SignUpRequest("TestOther"
                 , "TestOther"
                 , "testOther@test.com"
-                , "0987654321", "testUsername"
+                , "0987654321"
+                , "testUsername"
                 , "testPasswordOther");
         service.createApplicant(sameUsernameRequest);
     }
@@ -63,7 +65,8 @@ public class RecruitmentServiceTest {
         SignUpRequest sameEmailRequest = new SignUpRequest("TestOther"
                 , "TestOther"
                 , "test@test.com"
-                , "0987654321", "testUsernameOther"
+                , "0987654321"
+                , "testUsernameOther"
                 , "testPasswordOther");
         service.createApplicant(sameEmailRequest);
     }

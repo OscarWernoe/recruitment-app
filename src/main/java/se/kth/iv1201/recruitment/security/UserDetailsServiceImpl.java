@@ -10,6 +10,7 @@ import org.springframework.transaction.support.TransactionSynchronizationManager
 import se.kth.iv1201.recruitment.domain.Person;
 import se.kth.iv1201.recruitment.repository.PersonRepository;
 
+//TODO: JavaDocs
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 

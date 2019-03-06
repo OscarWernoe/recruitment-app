@@ -6,6 +6,7 @@ import se.kth.iv1201.recruitment.domain.Person;
 
 import java.util.Collection;
 
+//TODO: JavaDocs
 public class UserDetailsImpl implements UserDetails {
     private String username;
     private String password;

@@ -10,10 +10,13 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-import se.kth.iv1201.recruitment.presentation.EmailNotUniqueException;
+import se.kth.iv1201.recruitment.domain.EmailNotUniqueException;
+import se.kth.iv1201.recruitment.domain.UsernameNotUniqueException;
 import se.kth.iv1201.recruitment.presentation.Response;
-import se.kth.iv1201.recruitment.presentation.UsernameNotUniqueException;
 
+/**
+ * Handles exceptions thrown by the application, as well as incoming HTTP request target towards unknown resources.
+ */
 @Controller
 @ControllerAdvice
 public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionHandler implements ErrorController {

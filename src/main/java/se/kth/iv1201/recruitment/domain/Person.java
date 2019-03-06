@@ -37,6 +37,17 @@ public class Person {
     @JoinColumn(name = "role_id")
     private Role role;
 
+    /**
+     * Creates a new instance with the specified parameters.
+     *
+     * @param name     The user's name
+     * @param surname  The user's surname
+     * @param email    The user's email
+     * @param ssn      The user's social security number
+     * @param username The user's username
+     * @param password The user's password
+     * @param role     The user's role
+     */
     public Person(String name, String surname, String email, String ssn, String username, String password, Role role) {
         this.name = name;
         this.surname = surname;

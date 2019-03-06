@@ -5,6 +5,9 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
+/**
+ * DTO containing the validated user input for a login request.
+ */
 @Data
 public class LoginRequest {
 

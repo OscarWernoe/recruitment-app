@@ -30,9 +30,9 @@ public class RecruitmentController {
     /**
      * Creates an instance of the controller with a specified RecruitmentService linked to it.
      *
-     * @param service               The RecruitmentService instance.
-     * @param authenticationManager The AuthenticationManager instance.
-     * @param tokenProvider         The JwtTokenProvider instance.
+     * @param service               The RecruitmentService instance
+     * @param authenticationManager The AuthenticationManager instance
+     * @param tokenProvider         The JwtTokenProvider instance
      */
     @Autowired
     public RecruitmentController(RecruitmentService service, AuthenticationManager authenticationManager, JwtTokenProvider tokenProvider) {
@@ -43,8 +43,11 @@ public class RecruitmentController {
 
     /**
      * Handles applicant registration requests.
+     * If any exception is thrown due to this method's invocation, then it will be caught and handled by the
+     * {@code RestResponseEntityExceptionHandler} class.
      *
-     * @param signUpRequest DTO containing the necessary validated fields to register an account.
+     * @param signUpRequest DTO containing the necessary validated fields to register an account
+     * @return JSON response with relevant message
      */
     @PostMapping("/users")
     public ResponseEntity<?> register(@Valid @RequestBody SignUpRequest signUpRequest) throws Exception {
@@ -52,9 +55,13 @@ public class RecruitmentController {
         return ResponseEntity.ok(new Response(true, "Successfully registered applicant."));
     }
 
+
+    // TODO: is comment accurate?
     /**
-     * @param loginRequest DTO containing the necessary validated fields to login in to an account.
-     * @return JSON response with JWT access token.
+     * Generates an token for authentication to the requesting client.
+     *
+     * @param loginRequest DTO containing the necessary validated fields to login in to an account
+     * @return JSON response with JWT access token
      */
     @PostMapping("/session")
     public ResponseEntity<?> authenticate(@Valid @RequestBody LoginRequest loginRequest) {
@@ -72,7 +79,9 @@ public class RecruitmentController {
     }
 
     /**
-     * @return
+     * Saves an application to the database. Only available for clients with applicant-status.
+     *
+     * @return JSON response with relevant message
      */
     @PostMapping("/applications")
     public ResponseEntity<?> apply() {
@@ -84,7 +93,8 @@ public class RecruitmentController {
     }
 
     /**
-     * @return
+     * Fetches all available applications. Only available for clients with recruiter-status.
+     * @return JSON response with relevant message
      */
     @GetMapping("/applications")
     public ResponseEntity<?> listApplications() {
@@ -96,8 +106,10 @@ public class RecruitmentController {
     }
 
     /**
-     * @param id
-     * @return
+     * Shows a specified application. Only available for clients with recruiter-status.
+     *
+     * @param id The id of the desired application
+     * @return JSON response with relevant message
      */
     @GetMapping("/applications/{id}")
     public ResponseEntity<?> showApplication(@PathVariable Long id) {

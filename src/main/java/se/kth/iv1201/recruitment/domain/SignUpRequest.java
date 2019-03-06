@@ -8,7 +8,7 @@ import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
 /**
- * DTO containing user input validations for the sign up request.
+ * DTO containing the validated user input for a sign up request.
  */
 @Data
 public class SignUpRequest {
@@ -39,6 +39,16 @@ public class SignUpRequest {
     @Size(min = 8, max = 100)
     private String password;
 
+    /**
+     * Creates a new instance with the specified parameters.
+     *
+     * @param name     The new user's name
+     * @param surname  The new user's surname
+     * @param email    The new user's email
+     * @param ssn      The new user's social security number
+     * @param username The new user's username
+     * @param password The new user's password
+     */
     public SignUpRequest(String name, String surname, String email, String ssn, String username, String password) {
         this.name = name;
         this.surname = surname;

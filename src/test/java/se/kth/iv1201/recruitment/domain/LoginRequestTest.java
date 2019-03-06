@@ -12,8 +12,6 @@ import java.util.Set;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
 public class LoginRequestTest {
 
     private static Validator validator;
@@ -35,6 +33,6 @@ public class LoginRequestTest {
     public void violationsFoundBlankRequest() {
         LoginRequest blankRequest = new LoginRequest("", "");
         Set<ConstraintViolation<LoginRequest>> violations = validator.validate(blankRequest);
-        assertThat(violations.size(), is(3)); // We expect three conditions to be violated (use debug to see messages)
+        assertThat(violations.size(), is(3));
     }
 }

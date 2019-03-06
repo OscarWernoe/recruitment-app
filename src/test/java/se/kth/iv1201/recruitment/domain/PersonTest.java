@@ -33,8 +33,20 @@ public class PersonTest {
     @Before
     public void setup() throws Exception {
         Role role = roleRepository.findByName("applicant").orElseThrow(Exception::new);
-        person1 = new Person("Test1", "Test1", "test1@test.com", "1234567890", "test1Username", "testPassword", role);
-        person2 = new Person("Test2", "Test2", "test2@test.com", "0987654321", "test2Username", "testPassword", role);
+        person1 = new Person("Test1"
+                , "Test1"
+                , "test1@test.com"
+                , "1234567890"
+                , "test1Username"
+                , "testPassword"
+                , role);
+        person2 = new Person("Test2"
+                , "Test2"
+                , "test2@test.com"
+                , "0987654321"
+                , "test2Username"
+                , "testPassword"
+                , role);
         assertTrue(personRepository.findAll().isEmpty());
     }
 
