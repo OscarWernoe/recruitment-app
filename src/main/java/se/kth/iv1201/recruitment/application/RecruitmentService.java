@@ -3,6 +3,7 @@ package se.kth.iv1201.recruitment.application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import se.kth.iv1201.recruitment.domain.Person;
 import se.kth.iv1201.recruitment.domain.Role;
 import se.kth.iv1201.recruitment.domain.SignUpRequest;
@@ -13,6 +14,7 @@ import se.kth.iv1201.recruitment.repository.RoleRepository;
  * The service that specifies tasks to be performed by the domain layer.
  */
 @Service
+@Transactional
 public class RecruitmentService {
 
     private final PersonRepository personRepository;

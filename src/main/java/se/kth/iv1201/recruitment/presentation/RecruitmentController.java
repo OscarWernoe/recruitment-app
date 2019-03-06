@@ -52,9 +52,9 @@ public class RecruitmentController {
         try {
             this.service.createApplicant(signUpRequest);
         } catch (Exception e) {
-            return ResponseEntity.ok(new Response(false, null));
+            return ResponseEntity.ok(new Response(false, "Registration failed"));
         }
-        return ResponseEntity.ok(new Response(true, null));
+        return ResponseEntity.ok(new Response(true, "Successfully registered applicant."));
     }
 
     /**
@@ -81,7 +81,11 @@ public class RecruitmentController {
      */
     @PostMapping("/applications")
     public ResponseEntity<?> apply() {
-        return ResponseEntity.ok(new Response(true, null));
+        if (isApplicant()) {
+            return ResponseEntity.ok(new Response(true, "Successfully saved application."));
+        } else {
+            return new ResponseEntity<>(HttpStatus.UNAUTHORIZED);
+        }
     }
 
     /**
@@ -112,5 +116,10 @@ public class RecruitmentController {
     private boolean isRecruiter() {
         UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         return userDetails.getRole().equals("recruiter");
+    }
+
+    private boolean isApplicant() {
+        UserDetailsImpl userDetails = (UserDetailsImpl) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        return userDetails.getRole().equals("applicant");
     }
 }
