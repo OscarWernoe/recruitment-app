@@ -8,6 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 import se.kth.iv1201.recruitment.domain.SignUpRequest;
+import se.kth.iv1201.recruitment.presentation.EmailNotUniqueException;
+import se.kth.iv1201.recruitment.presentation.UsernameNotUniqueException;
 import se.kth.iv1201.recruitment.repository.PersonRepository;
 
 import static org.hamcrest.Matchers.greaterThan;
@@ -44,7 +46,25 @@ public class RecruitmentServiceTest {
         assertThat(countAfter, is(greaterThan(countBefore)));
     }
 
-    // TODO test existByUsername()
-    // TODO test existByEmail()
+    @Test(expected = UsernameNotUniqueException.class)
+    public void createApplicantUsernameExists() throws Exception {
+        service.createApplicant(signUpRequest);
+        SignUpRequest sameUsernameRequest = new SignUpRequest("TestOther"
+                , "TestOther"
+                , "testOther@test.com"
+                , "0987", "testUsername"
+                , "testPasswordOther");
+        service.createApplicant(sameUsernameRequest);
+    }
 
+    @Test(expected = EmailNotUniqueException.class)
+    public void createApplicantEmailExists() throws Exception {
+        service.createApplicant(signUpRequest);
+        SignUpRequest sameEmailRequest = new SignUpRequest("TestOther"
+                , "TestOther"
+                , "test@test.com"
+                , "0987", "testUsernameOther"
+                , "testPasswordOther");
+        service.createApplicant(sameEmailRequest);
+    }
 }

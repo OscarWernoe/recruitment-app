@@ -45,7 +45,17 @@ public class PersonRepositoryTest {
         assertEquals(person, actual);
     }
 
-    // TODO test existByUsername()
-    // TODO test existByEmail()
+    @Test
+    public void existsByUsername() throws Exception {
+        Person person = getPerson();
+        personRepository.save(person);
+        assertTrue(personRepository.existsByUsername(person.getUsername()));
+    }
 
+    @Test
+    public void existsByEmail() throws Exception {
+        Person person = getPerson();
+        personRepository.save(person);
+        assertTrue(personRepository.existsByEmail(person.getEmail()));
+    }
 }

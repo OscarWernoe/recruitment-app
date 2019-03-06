@@ -12,8 +12,6 @@ import java.util.Set;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-//@RunWith(SpringRunner.class)
-//@SpringBootTest
 public class SignUpRequestTest {
 
     private static Validator validator;
@@ -46,4 +44,5 @@ public class SignUpRequestTest {
         Set<ConstraintViolation<SignUpRequest>> violations = validator.validate(invalidRequest);
         assertThat(violations.size(), is(3));
     }
+    //TODO do not include this class in commit
 }

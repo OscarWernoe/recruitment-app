@@ -14,9 +14,7 @@ import se.kth.iv1201.recruitment.repository.RoleRepository;
 import java.util.Optional;
 
 import static junit.framework.TestCase.assertTrue;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.not;
-import static org.junit.Assert.assertEquals;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 @RunWith(SpringRunner.class)
@@ -37,7 +35,6 @@ public class PersonTest {
         Role role = roleRepository.findByName("applicant").orElseThrow(Exception::new);
         person1 = new Person("Test1", "Test1", "test1@test.com", "1234", "test1Username", "testPassword", role);
         person2 = new Person("Test2", "Test2", "test2@test.com", "4321", "test2Username", "testPassword", role);
-        // Check that the database is empty (tests should leave a lasting effect) - must test against an empty database
         assertTrue(personRepository.findAll().isEmpty());
     }
 
@@ -60,7 +57,7 @@ public class PersonTest {
         assertTrue(optionalPerson2.isPresent());
         Person fetchedPerson1 = optionalPerson1.get();
         Person fetchedPerson2 = optionalPerson2.get();
-        assertEquals(fetchedPerson1.getId(), fetchedPerson2.getId() - 1);
+        assertThat(fetchedPerson1.getId(), equalTo(fetchedPerson2.getId() - 1));
     }
 
     @Test(expected = DataIntegrityViolationException.class)
