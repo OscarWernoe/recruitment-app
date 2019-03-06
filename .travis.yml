@@ -1,2 +1,12 @@
+sudo: required
 language: java
 jdk: oraclejdk11
+addons:
+  mariadb: 10.3
+before_script:
+  - mysql -e "CREATE DATABASE recruitment_db;" -u root
+  - mysql recruitment_db < db.sql -u root
+env:
+  - DB_URL=jdbc:mariadb://localhost:3306/recruitment_db
+  - DB_USERNAME=root
+  - DB_PASSWORD=
