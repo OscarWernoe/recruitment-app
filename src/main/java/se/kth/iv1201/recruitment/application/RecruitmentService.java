@@ -9,7 +9,7 @@ import se.kth.iv1201.recruitment.repository.PersonRepository;
 import se.kth.iv1201.recruitment.repository.RoleRepository;
 
 /**
- * The service that specifies tasks to be performed by the reopsitory layer.
+ * The service that specifies tasks to be performed by the repository layer.
  * The class is annotated using {@code @Transactional}, thus, all the methods will be performed using transactions.
  */
 @Service

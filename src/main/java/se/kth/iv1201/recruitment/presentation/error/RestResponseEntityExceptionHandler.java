@@ -15,7 +15,7 @@ import se.kth.iv1201.recruitment.domain.UsernameNotUniqueException;
 import se.kth.iv1201.recruitment.presentation.Response;
 
 /**
- * Handles exceptions thrown by the application, as well as incoming HTTP request target towards unknown resources.
+ * Handles exceptions thrown by the application, as well as incoming HTTP request to unknown resources.
  */
 @Controller
 @ControllerAdvice
@@ -44,7 +44,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
     }
 
     /**
-     * The exception handler that resolves the broken business rule of email uniqueness.
+     * The exception handler that resolves the broken business rule of email address uniqueness.
      *
      * @return A HTTP response with relevant status and response body.
      */

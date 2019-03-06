@@ -58,9 +58,9 @@ public class RecruitmentController {
 
     // TODO: is comment accurate?
     /**
-     * Generates an token for authentication to the requesting client.
+     * Generates a token for authentication to the requesting client.
      *
-     * @param loginRequest DTO containing the necessary validated fields to login in to an account
+     * @param loginRequest DTO containing the necessary validated fields to log in to an account
      * @return JSON response with JWT access token
      */
     @PostMapping("/session")
