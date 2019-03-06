@@ -49,7 +49,7 @@ public class RecruitmentController {
     @PostMapping("/users")
     public ResponseEntity<?> register(@Valid @RequestBody SignUpRequest signUpRequest) throws Exception {
         this.service.createApplicant(signUpRequest);
-        return ResponseEntity.ok(new Response(true, null));
+        return ResponseEntity.ok(new Response(true, "Successfully registered applicant."));
     }
 
     /**
