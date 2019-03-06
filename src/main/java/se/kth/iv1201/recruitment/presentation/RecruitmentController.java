@@ -45,16 +45,11 @@ public class RecruitmentController {
      * Handles applicant registration requests.
      *
      * @param signUpRequest DTO containing the necessary validated fields to register an account.
-     * @return JSON response with indication of the result of the account creation.
      */
     @PostMapping("/users")
-    public ResponseEntity<?> register(@Valid @RequestBody SignUpRequest signUpRequest) {
-        try {
-            this.service.createApplicant(signUpRequest);
-        } catch (Exception e) {
-            return ResponseEntity.ok(new Response(false, "Registration failed"));
-        }
-        return ResponseEntity.ok(new Response(true, "Successfully registered applicant."));
+    public ResponseEntity<?> register(@Valid @RequestBody SignUpRequest signUpRequest) throws Exception {
+        this.service.createApplicant(signUpRequest);
+        return ResponseEntity.ok(new Response(true, null));
     }
 
     /**

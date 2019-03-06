@@ -7,6 +7,8 @@ import org.springframework.transaction.annotation.Transactional;
 import se.kth.iv1201.recruitment.domain.Person;
 import se.kth.iv1201.recruitment.domain.Role;
 import se.kth.iv1201.recruitment.domain.SignUpRequest;
+import se.kth.iv1201.recruitment.presentation.EmailNotUniqueException;
+import se.kth.iv1201.recruitment.presentation.UsernameNotUniqueException;
 import se.kth.iv1201.recruitment.repository.PersonRepository;
 import se.kth.iv1201.recruitment.repository.RoleRepository;
 
@@ -42,6 +44,14 @@ public class RecruitmentService {
      * @throws Exception If the account isn't successfully created.
      */
     public void createApplicant(SignUpRequest signUpRequest) throws Exception {
+        if (personRepository.existsByUsername(signUpRequest.getUsername())) {
+            throw new UsernameNotUniqueException();
+        }
+
+        if (personRepository.existsByEmail(signUpRequest.getEmail())) {
+            throw new EmailNotUniqueException();
+        }
+
         signUpRequest.setPassword(passwordEncoder.encode(signUpRequest.getPassword()));
         Role role = roleRepository.findByName("applicant")
                 .orElseThrow(Exception::new);
