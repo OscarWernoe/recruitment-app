@@ -13,7 +13,7 @@ import se.kth.iv1201.recruitment.repository.RoleRepository;
  * The class is annotated using {@code @Transactional}, thus, all the methods will be performed using transactions.
  */
 @Service
-@Transactional
+@Transactional(rollbackFor = Exception.class)
 public class RecruitmentService {
 
     private final PersonRepository personRepository;

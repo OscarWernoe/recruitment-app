@@ -28,7 +28,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
      */
     @ExceptionHandler(value = {Exception.class})
     public ResponseEntity<?> handleConflict(Exception ex, WebRequest request) {
-        Response bodyOfResponse = new Response(false, "There was a problem creating the account.");
+        Response bodyOfResponse = new Response(false, "There was a problem processing the request.");
         return handleExceptionInternal(ex, bodyOfResponse, new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, request);
     }
 
