@@ -20,10 +20,8 @@ import se.kth.iv1201.recruitment.security.UserDetailsServiceImpl;
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO: JavaDocs
-
 /**
- *
+ * Contains the security configuration for the application.
  */
 @Configuration
 @EnableWebSecurity
@@ -34,8 +32,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
 
     /**
-     * @param userDetailsService
-     * @param jwtAuthenticationEntryPoint
+     * Creates an instance with the specified {@code UserDetailsService} and {@code JwtAuthenticationEntryPoint}.
+     *
+     * @param userDetailsService          The UserDetailsService instance
+     * @param jwtAuthenticationEntryPoint The JwtAuthenticationEntryPoint instance
      */
     @Autowired
     public SecurityConfig(UserDetailsServiceImpl userDetailsService, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint) {
@@ -44,7 +44,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * @return
+     * Creates a PasswordEncoder bean.
+     *
+     * @return An instance of PasswordEncoder
      */
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -55,8 +57,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * @return
-     * @throws Exception
+     * Creates a JwtAuthenticationFilter bean.
+     *
+     * @return A JwtAuthenticationFilter instance
+     * @throws Exception If error encountered
      */
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
@@ -64,8 +68,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * @return
-     * @throws Exception
+     * Creates an AuthenticationManager bean.
+     *
+     * @return An AuthenticationManager instance
+     * @throws Exception If error encountered
      */
     @Bean(BeanIds.AUTHENTICATION_MANAGER)
     @Override
@@ -74,8 +80,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * @param auth
-     * @throws Exception
+     * Configures the AuthenticationManager instance.
+     *
+     * @param auth The AuthenticationManager instance
+     * @throws Exception If error encountered
      */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -83,8 +91,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     /**
-     * @param http
-     * @throws Exception
+     * Configures the security of the application.
+     *
+     * @param http The HttpSecurity instance
+     * @throws Exception If error encountered
      */
     @Override
     protected void configure(HttpSecurity http) throws Exception {

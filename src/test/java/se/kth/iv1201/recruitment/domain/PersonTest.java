@@ -47,7 +47,8 @@ public class PersonTest {
                 , "test2Username"
                 , "testPassword"
                 , role);
-        assertTrue(personRepository.findAll().isEmpty());
+        assertTrue(personRepository.findByUsername("test1Username").isEmpty());
+        assertTrue(personRepository.findByUsername("test2Username").isEmpty());
     }
 
     @Test
