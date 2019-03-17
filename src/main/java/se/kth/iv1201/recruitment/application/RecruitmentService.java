@@ -8,6 +8,8 @@ import se.kth.iv1201.recruitment.domain.*;
 import se.kth.iv1201.recruitment.repository.PersonRepository;
 import se.kth.iv1201.recruitment.repository.RoleRepository;
 
+import javax.validation.Valid;
+
 /**
  * The service that specifies tasks to be performed by the repository layer.
  * The class is annotated using {@code @Transactional}, thus, all the methods will be performed using transactions.
@@ -40,7 +42,7 @@ public class RecruitmentService {
      * @param signUpRequest DTO containing the necessary validated fields to register an account
      * @throws Exception If the account isn't successfully created
      */
-    public void createApplicant(SignUpRequest signUpRequest) throws Exception {
+    public void createApplicant(@Valid SignUpRequest signUpRequest) throws Exception {
         if (personRepository.existsByUsername(signUpRequest.getUsername())) {
             throw new UsernameNotUniqueException();
         }

@@ -52,7 +52,9 @@ public class RecruitmentControllerTest {
                 .content(requestBody)).andDo(print())
                 .andExpect(status().isOk());
 
-        MvcResult result = this.mockMvc.perform(post("/session").contentType(MediaType.APPLICATION_JSON).content("{\"username\":\"testUsername\",\"password\":\"testPassword\"}"))
+        MvcResult result = this.mockMvc.perform(post("/session")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content("{\"username\":\"testUsername\",\"password\":\"testPassword\"}"))
                 .andDo(print()).andExpect(status().isOk()).andReturn();
 
         String response = result.getResponse().getContentAsString();
