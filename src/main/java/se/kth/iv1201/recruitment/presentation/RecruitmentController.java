@@ -56,7 +56,6 @@ public class RecruitmentController {
     }
 
 
-    // TODO: is comment accurate?
     /**
      * Generates a token for authentication to the requesting client.
      *

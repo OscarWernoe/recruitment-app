@@ -20,8 +20,6 @@ public class JwtTokenProvider {
     public String generateToken(Authentication authentication) {
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
 
-        // TODO: Set expiration in JWT
-
         return Jwts.builder()
                 .setSubject(userDetails.getUsername())
                 .claim("role", userDetails.getRole())

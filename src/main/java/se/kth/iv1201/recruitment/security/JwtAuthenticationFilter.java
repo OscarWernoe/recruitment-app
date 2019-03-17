@@ -42,7 +42,6 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
                 String username = Jwts.parser().setSigningKey(JwtTokenProvider.SECRET_KEY).parseClaimsJws(jwt).getBody().getSubject();
 
-                // TODO: Create UserDetails from JWT
                 UserDetails userDetails = userDetailsService.loadUserByUsername(username);
 
                 UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, new ArrayList<>());
